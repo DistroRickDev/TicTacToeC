@@ -1,11 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 /* Defining Boolean variables  */
 #define TRUE 1
 #define FALSE 0
 #define true TRUE
 #define false FALSE
+
+/* Define Plays  */
+#define CROSS 'x'
+#define CIRCLE 'O'
 
 /* Global Variables  */
 char board[3][3] = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
@@ -14,10 +19,12 @@ char board[3][3] = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
 void printBoard();
 void initMenu();
 void gameMenu();
+int cpuDecision();
 
 void main(void)
 {
-	gameMenu();
+	//gameMenu();
+	printf("%d\n", cpuDecision());
 }
 
 void printBoard()
@@ -71,5 +78,31 @@ void gameMenu()
 		default:
 			printf("Please select a valid option\n");
 			gameMenu(0);
+	}
+}
+
+int cpuDecision()
+{
+	int decision=0;
+	srand(time(NULL)); //seeds random number in time now
+	decision = (rand() %  (2 - 0 + 1)) + 0;
+}
+
+void play(char play)
+{
+	int x=0;
+	int y=0;
+	printf("Enter x coordinate\n");
+	scanf("%d", &x);
+	printf("Enter y coordinates\n");
+	printf("%d", &y);
+	if(x<0 || x>2 || y<0 || y>2 || board[x][y] != ' ')
+	{
+		printf("Please choose valid coordinates\n");
+	}
+	else
+	{
+		board[x][y] = play;
+		printBoard();
 	}
 }
