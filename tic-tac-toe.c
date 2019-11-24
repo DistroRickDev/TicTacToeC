@@ -20,11 +20,13 @@ void printBoard();
 void initMenu();
 void gameMenu();
 int cpuDecision();
+void play(char element);
 
 void main(void)
 {
 	//gameMenu();
-	printf("%d\n", cpuDecision());
+	//printf("%d\n", cpuDecision());
+	play(CROSS);
 }
 
 void printBoard()
@@ -88,7 +90,7 @@ int cpuDecision()
 	decision = (rand() %  (2 - 0 + 1)) + 0;
 }
 
-void play(char play)
+void play(char element)
 {
 	int x=0;
 	int y=0;
@@ -102,7 +104,8 @@ void play(char play)
 	}
 	else
 	{
-		board[x][y] = play;
+		board[x][y] = element;
 		printBoard();
+		play(element);
 	}
 }
