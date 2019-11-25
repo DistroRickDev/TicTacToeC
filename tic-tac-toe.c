@@ -15,18 +15,29 @@
 /* Global Variables  */
 char board[3][3] = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
 
+int coord_x;
+int coord_y;
+
 /* Function Prototypes  */
 void printBoard();
 void initMenu();
 void gameMenu();
 int cpuDecision();
-void play(char element);
+void play(int x, int y, char element);
 
 void main(void)
 {
+	coord_x=-1;
+	coord_y=-1;
 	//gameMenu();
 	//printf("%d\n", cpuDecision());
-	play(CROSS);
+	while(1){
+		printf("Enter x coordinates\n");
+		scanf("%d" , &coord_x);
+		printf("Enter y coordinates\n");
+		scanf("%d", &coord_y);
+		play(coord_x,coord_y,CROSS);
+	}
 }
 
 void printBoard()
@@ -90,15 +101,10 @@ int cpuDecision()
 	decision = (rand() %  (2 - 0 + 1)) + 0;
 }
 
-void play(char element)
+void play(int x, int y,char element)
 {
-	int x=0;
-	int y=0;
-	printf("Enter x coordinate\n");
-	scanf("%d", &x);
-	printf("Enter y coordinates\n");
-	printf("%d", &y);
-	if(x<0 || x>2 || y<0 || y>2 || board[x][y] != ' ')
+
+	if(x<0 && x>2 || y<0 && y>2 || board[x][y] != ' ')
 	{
 		printf("Please choose valid coordinates\n");
 	}
@@ -106,6 +112,5 @@ void play(char element)
 	{
 		board[x][y] = element;
 		printBoard();
-		play(element);
 	}
 }
