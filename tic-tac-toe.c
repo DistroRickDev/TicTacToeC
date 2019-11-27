@@ -22,7 +22,7 @@ int coord_y;
 void printBoard();
 void initMenu();
 void gameMenu();
-int cpuDecision();
+void cpuDecision();
 void play(int x, int y, char element);
 
 void main(void)
@@ -37,6 +37,7 @@ void main(void)
 		printf("Enter y coordinates\n");
 		scanf("%d", &coord_y);
 		play(coord_x,coord_y,CROSS);
+		cpuDecision();
 	}
 }
 
@@ -94,11 +95,21 @@ void gameMenu()
 	}
 }
 
-int cpuDecision()
+void cpuDecision()
 {
-	int decision=0;
+	u_int8_t decision_x=0;
+	u_int8_t decision_y=0;
 	srand(time(NULL)); //seeds random number in time now
-	decision = (rand() %  (2 - 0 + 1)) + 0;
+	decision_x = (rand() %  (2 - 0 + 1)) + 0;
+	decision_y = (rand() % (2 - 0 + 1)) +0;
+	if (board[decision_x][decision_y] != ' ')
+	{
+		cpuDecision();
+	}
+	else{
+		board[decision_x][decision_y] = CIRCLE;
+		printBoard();
+	}
 }
 
 void play(int x, int y,char element)
